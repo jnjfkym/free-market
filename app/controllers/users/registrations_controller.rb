@@ -3,6 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  prepend_before_action :check_recaptcha, only: [:create]
   layout 'no_menu'
 
   # GET /resource/sign_up
@@ -66,6 +67,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
   def after_sign_up_path_for(resource)
     user_path(resource)
+  end
+
+  private
+  def check_recaptcha
+    redirect_to new_user_registration_path unless verify_recaptcha(message: "reCAPTCHAを承認してください")
   end
 
   # The path used after sign up.

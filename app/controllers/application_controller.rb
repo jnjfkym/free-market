@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :basic_auth, if: :production?
   #deviseのストロングパラメーター↓↓
   before_action :configure_permitted_paramaters, if: :devise_controller?
+  before_action :authenticate_user!
 
   private
 

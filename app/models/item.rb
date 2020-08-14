@@ -14,6 +14,12 @@ class Item < ApplicationRecord
   has_many :images, dependent: :destroy
   accepts_nested_attributes_for :images, allow_destroy: true, update_only: true
 
+  ##scope :new_items, -> ( order("created_at DESC").limit(4) )
+
+  def self.search_by_categories(category_ids)
+    return Item.where(category_id: category_ids).includes(:images)
+  end
+
   enum condition:{
     "新品、未使用": 0,
     "未使用に近い": 1,

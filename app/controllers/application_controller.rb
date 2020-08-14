@@ -6,6 +6,11 @@ class ApplicationController < ActionController::Base
 
   private
 
+  #新規登録・ログイン後トップページからマイページへリダイレクト
+  def after_sign_in_path_for(resource)
+    user_path(resource)
+  end
+
   def production?
     Rails.env.production?
   end
@@ -19,11 +24,6 @@ class ApplicationController < ActionController::Base
   #ストロングパラメーターの内容
   def configure_permitted_paramaters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :first_name, :first_name_reading, :last_name, :last_name_reading, :birthday])
-  end
-
-  #新規登録・ログイン後トップページからマイページへリダイレクト
-  def after_sign_in_path_for(resource)
-    user_path(resource)
   end
 
 end

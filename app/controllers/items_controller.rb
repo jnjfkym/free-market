@@ -40,15 +40,18 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    #@item = Item.find(params[:id])
     @item.images.build
     render layout: 'no_menu' # レイアウトファイル指定
   end
 
   def update
     if @item.update(item_params)
-      redirect_to edit_item_path(@item), alert: @item.errors.full_messages
+      #redirect_to edit_item_path(@item), alert: @item.errors.full_messages
+      redirect_to root_path, notice: "商品の編集が完了しました。"
     else
-      render layout: 'no_menu', action: :edit
+      #render layout: 'no_menu', action: :edit
+      redirect_to edit_item_path(@item), alert: @item.errors.full_messages
     end
   end
 

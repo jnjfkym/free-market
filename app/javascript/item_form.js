@@ -87,4 +87,4 @@ document.addEventListener("turbolinks:load", function () {
     $(`#item_images_attributes_${index}_src`).trigger("click"); // 画像に対応する編集ボタンを起動する
   });
   /////////画像の編集ボタンをクリックした時ここまで/////////
-});.
+});

@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :basic_auth, if: :production?
+  #before_action :basic_auth, if: :production?
   #deviseのストロングパラメーター↓↓
   before_action :configure_permitted_paramaters, if: :devise_controller?
   before_action :authenticate_user!
@@ -15,11 +15,11 @@ class ApplicationController < ActionController::Base
     Rails.env.production?
   end
 
-  def basic_auth
-    authenticate_or_request_with_http_basic do |username, password|
-      username == Rails.application.credentials.basic[:user_name] && password == Rails.application.credentials.basic[:password]
-    end
-  end
+  # def basic_auth
+  #   authenticate_or_request_with_http_basic do |username, password|
+  #     username == Rails.application.credentials.basic[:user_name] && password == Rails.application.credentials.basic[:password]
+  #   end
+  # end
   
   #ストロングパラメーターの内容
   def configure_permitted_paramaters
